@@ -19,7 +19,6 @@ public class Server {
             socket = new DatagramSocket(porta);
             System.out.println("Servidor iniciado...");
 
-            String msgEnviada = "";
             while (run) {
                 //recebimento dos dados em um datagrama de 1024 bytes
                 DatagramPacket bufferRecebimento = new DatagramPacket(new byte[1024], 1024);
@@ -30,7 +29,7 @@ public class Server {
                 System.out.println("O cliente disse: " + msgRecebida);
 
                 //envio de dados para o emissor do datagrama recebido
-                msgEnviada += msgRecebida;
+                String msgEnviada = msgRecebida;
                 DatagramPacket bufferEnvio = new DatagramPacket(msgEnviada.getBytes(), msgEnviada.getBytes().length, bufferRecebimento.getAddress(), bufferRecebimento.getPort());
                 socket.send(bufferEnvio);
             }

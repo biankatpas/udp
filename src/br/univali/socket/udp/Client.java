@@ -6,6 +6,7 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,6 +21,7 @@ public class Client
     private String server;
     private DatagramSocket socket;
     private InetAddress address;
+    private Scanner s; 
 
     public Client(int port, String server, String name) 
     {
@@ -32,6 +34,7 @@ public class Client
             socket = new DatagramSocket();
             address = InetAddress.getByName(this.server);
             
+            s = new Scanner(System.in);
         } 
         catch (SocketException ex) 
         {
@@ -45,7 +48,8 @@ public class Client
 
     public byte[] readMessage() 
     {
-        String message = JOptionPane.showInputDialog(null, "Digite a mensagem do cliente " + name);
+        System.out.println("Digite a mensagem para o servidor: ");
+        String message = s.nextLine();
         return message.getBytes();
     }
     
@@ -65,7 +69,7 @@ public class Client
     public void printMessage(DatagramPacket receiveBuffer)
     {
         String receiveMessage = new String(receiveBuffer.getData());
-        System.out.println("O servidor disse: " + receiveMessage);
+        System.out.println("O servidor respondeu: " + receiveMessage);
     }
 
     public void run() {
