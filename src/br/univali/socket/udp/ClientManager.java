@@ -7,8 +7,5 @@ package br.univali.socket.udp;
 public class ClientManager {
     public static void main(String[] args) {
         new Client(12345, "127.0.0.1", "A").run();
-//        new Client(12345, "127.0.0.1", "B").run();
-//        new Client(12345, "127.0.0.1", "C").run();
     }
-    
 }

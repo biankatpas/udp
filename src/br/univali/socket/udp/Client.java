@@ -71,15 +71,24 @@ public class Client
         System.out.println("O servidor respondeu: " + receiveMessage);
     }
 
-    public void run() {
-        while (true) {
-            try {
+    public void run() 
+    {
+        boolean control = true;
+        while (control) 
+        {
+            try
+            {
                 byte[] data = readMessage(); //solicita a msg a ser enviada
                 sendMessage(data); //envio dos dados para o emissor do datagrama recebido
                 DatagramPacket receiveBuffer = receiveMessage(); //recebimento dos dados em um buffer de 1024 bytes
                 printMessage(receiveBuffer); //imprime a msg recebida
-                
-            } catch (IOException ex) {
+                System.out.println("Enviar outra msg? s/n");
+                if(s.next().equalsIgnoreCase("n"))
+                    control = false;
+                //TODO limpar buffer scanner
+            } 
+            catch (IOException ex) 
+            {
                 System.err.println(ex);
             }
         }
